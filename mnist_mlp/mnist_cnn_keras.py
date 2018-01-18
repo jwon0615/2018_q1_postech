@@ -58,7 +58,7 @@ model.add(Dense(num_classes, activation='softmax'))
 model.compile(loss=keras.losses.categorical_crossentropy,
               optimizer=keras.optimizers.Adadelta(),
               metrics=['accuracy'])
-
+""""
 model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
@@ -67,3 +67,8 @@ model.fit(x_train, y_train,
 score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
+"""
+
+# 4. 모델 학습시키기
+tb_hist = keras.callbacks.TensorBoard(log_dir='./graph', histogram_freq=0, write_graph=True, write_images=True)
+model.fit(x_train, y_train, epochs=epochs, batch_size=batch_size,verbose=1, validation_data=(x_test, y_test), callbacks=[tb_hist])
